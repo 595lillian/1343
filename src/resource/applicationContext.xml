@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 配置bean -->
+    <!-- id "标识组件
+     class 指定组件的类型 ，使用全称-->
+
+    <bean id="accountDao"  name="accountDao2 accountDao3,accountDao4;accountDao5" class="com.hbnu.dao.AccountDao">
+        <property name="account" value="HBNU Pet Account"/>
+    </bean>
+    <bean id="itemDao" class="com.hbnu.dao.ItemDao">
+        <property name="item" value="Cat"></property>
+    </bean>
+    <!-- 构造器实例化bean -->
+    <bean id="userDao" class="com.hbnu.dao.UserDao"/>
+    <!-- 静态工厂方法实例化bean -->
+    <!-- <bean id="userDao1" class="com.hbnu.factory.UserStaticFactory" factory-method="createInstance"/> -->
+    <!-- 实例化工厂方法 创建bean -->
+    <!-- 1.创建实例工厂的工厂对象 -->
+    <!-- <bean id="userInstanceFactory" class="com.hbnu.factory.UserInstanceFactory"/> -->
+    <!-- 2.通过工厂对象来创建实例 -->
+    <!-- <bean id="userDao2" factory-bean="userInstanceFactory" factory-method="createInstance"/> -->
+
+    <!-- 构造器注入 -->
+    <bean id="userDao3" class="com.hbnu.dao.UserDao">
+        <constructor-arg type="int" value="1"/>
+        <constructor-arg type="java.lang.String" value="zka"/>
+        <constructor-arg index="1" value="huangshi"/>
+        <constructor-arg name="accountDao" ref="accountDao"/>
+    </bean>
+    <!-- setter注入 -->
+    <bean id="userDao4" class="com.hbnu.dao.UserDao">
+        <property name="id" value="2"/>
+        <property name="name" value="zka"/>
+        <property name="accountDao" ref="accountDao"/>
+        <property name="address" value="huangshi"/>
+    </bean>
+    <!-- 复杂类型注入 -->
+    <bean id="complexDao" class="com.hbnu.dao.ComplexDao">
+        <property name="list">
+            <list>
+                <value>123</value>
+                <value>zka</value>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>1</value>
+                <value>2</value>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="Spring" value="2114"></entry>
+                <entry key="Spring1" value="2113"></entry>
+            </map>
+        </property>
+    </bean>
+</beans>
